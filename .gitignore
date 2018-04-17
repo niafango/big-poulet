@@ -1,5 +1,6 @@
 # Project specifics
-
+dist/
+config.json
 
 # Logs
 logs
