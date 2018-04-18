@@ -36,8 +36,17 @@ client.on("message", (message): void => {
         return;
     }
 
-    if (command.args && !args.length) {
-        message.reply(`You didn't provide any arguments!`);
+    if (command.args && args.length < command.minimumArgsNb) {
+        let reply: string;
+
+        if (!args.length) {
+            reply = ("You didn't provide any arguments!");
+        } else {
+            reply = ("You didn't provide enough arguments!");
+        }
+        reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+
+        message.reply(reply);
         return;
     }
 

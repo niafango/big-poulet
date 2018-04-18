@@ -5,6 +5,8 @@ const prune: ICommand = {
     name: "prune",
     description: "Prune!",
     args: true,
+    minimumArgsNb: 1,
+    usage: "<number of messages to delete>",
 
     execute(message: Message, args: string[]): void {
         const amount = parseInt(args[0], 10) + 1;

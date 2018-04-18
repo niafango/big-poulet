@@ -5,6 +5,8 @@ const argsInfo: ICommand = {
     name: "args-info",
     description: "Args-info",
     args: true,
+    minimumArgsNb: 1,
+    usage: "<...arguments>",
 
     execute(message: Message, args: string[]): void {
         if (args[0] === "foo") {

@@ -5,6 +5,8 @@ const avatar: ICommand = {
     name: "avatar",
     description: "Avatar!",
     args: false,
+    minimumArgsNb: 0,
+    usage: "",
 
     execute(message: Message): void {
         if (!message.mentions.users.size) {

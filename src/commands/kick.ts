@@ -5,6 +5,8 @@ const kick: ICommand = {
     name: "kick",
     description: "Kick!",
     args: false,
+    minimumArgsNb: 0,
+    usage: "",
 
     execute(message: Message): void {
         if (!message.mentions.users.size) {

@@ -5,6 +5,8 @@ const server: ICommand = {
     name: "server",
     description: "Server!",
     args: false,
+    minimumArgsNb: 0,
+    usage: "",
 
     execute(message: Message): void {
         message.channel.send(

@@ -5,6 +5,8 @@ const userInfo: ICommand = {
     name: "user-info",
     description: "User-info!",
     args: false,
+    minimumArgsNb: 0,
+    usage: "",
 
     execute(message: Message): void {
         message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);

@@ -5,6 +5,8 @@ const ping: ICommand = {
     name: "ping",
     description: "Ping!",
     args: false,
+    minimumArgsNb: 0,
+    usage: "",
 
     execute(message: Message): void {
         message.channel.send("Pong.");
