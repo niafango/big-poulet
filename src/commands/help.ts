@@ -35,7 +35,7 @@ const help: ICommand = {
                 data.push(`**Aliases:** ${command.aliases.join(", ")}`);
             }
             data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
-            data.push(`**Cooldown:** ${command.coolDown} second(s)`);
+            data.push(`**CoolDown:** ${command.coolDown} second(s)`);
         }
 
         message.author.send(data, { split: true })
