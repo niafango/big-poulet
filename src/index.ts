@@ -1,17 +1,9 @@
 import {Client, Collection, Message} from "discord.js";
-import fs = require("fs");
-import ICommand from "./ICommand";
+import CommandsSingleton from "./singletons/CommandsSingleton";
 const { prefix, token } = require("../config.json");
 
 const client = new Client();
-const commands: Collection<string, ICommand> = new Collection();
-
-const commandFiles: string[] = fs.readdirSync("./dist/commands");
-
-for (const file of commandFiles) {
-    const command: ICommand = require(`./commands/${file}`);
-    commands.set(command.name, command);
-}
+const commands = CommandsSingleton.Instance.commands;
 
 const coolDowns: Collection<string, Collection<string, number>> = new Collection();
 
