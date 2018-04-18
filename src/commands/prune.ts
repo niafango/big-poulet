@@ -4,9 +4,12 @@ import ICommand from "../ICommand";
 const prune: ICommand = {
     name: "prune",
     description: "Prune!",
-    args: true,
-    minimumArgsNb: 1,
     usage: "<number of messages to delete>",
+
+    coolDown: 5,
+    isGuildOnly: false,
+    hasArgs: true,
+    minimumArgsNb: 1,
 
     execute(message: Message, args: string[]): void {
         const amount = parseInt(args[0], 10) + 1;

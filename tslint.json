@@ -5,6 +5,7 @@
   ],
   "jsRules": {},
   "rules": {
+    "no-console": [false],
     "no-var-requires": false,
     "object-literal-sort-keys": false
   },

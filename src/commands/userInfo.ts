@@ -4,9 +4,12 @@ import ICommand from "../ICommand";
 const userInfo: ICommand = {
     name: "user-info",
     description: "User-info!",
-    args: false,
-    minimumArgsNb: 0,
     usage: "",
+
+    coolDown: 5,
+    isGuildOnly: false,
+    hasArgs: false,
+    minimumArgsNb: 0,
 
     execute(message: Message): void {
         message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);

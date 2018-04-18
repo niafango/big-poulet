@@ -4,9 +4,12 @@ import ICommand from "../ICommand";
 const role: ICommand = {
     name: "role",
     description: "Role!",
-    args: true,
-    minimumArgsNb: 2,
     usage: "<user> <role>",
+
+    coolDown: 5,
+    isGuildOnly: true,
+    hasArgs: true,
+    minimumArgsNb: 2,
 
     execute(message: Message, args: string[]): void {
         const user = args[0];

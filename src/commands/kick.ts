@@ -4,9 +4,12 @@ import ICommand from "../ICommand";
 const kick: ICommand = {
     name: "kick",
     description: "Kick!",
-    args: false,
-    minimumArgsNb: 0,
     usage: "",
+
+    coolDown: 5,
+    isGuildOnly: true,
+    hasArgs: false,
+    minimumArgsNb: 0,
 
     execute(message: Message): void {
         if (!message.mentions.users.size) {

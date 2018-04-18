@@ -4,9 +4,12 @@ import ICommand from "../ICommand";
 const avatar: ICommand = {
     name: "avatar",
     description: "Avatar!",
-    args: false,
-    minimumArgsNb: 0,
     usage: "",
+
+    coolDown: 5,
+    isGuildOnly: false,
+    hasArgs: false,
+    minimumArgsNb: 0,
 
     execute(message: Message): void {
         if (!message.mentions.users.size) {

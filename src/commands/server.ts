@@ -4,9 +4,12 @@ import ICommand from "../ICommand";
 const server: ICommand = {
     name: "server",
     description: "Server!",
-    args: false,
-    minimumArgsNb: 0,
     usage: "",
+
+    coolDown: 5,
+    isGuildOnly: true,
+    hasArgs: false,
+    minimumArgsNb: 0,
 
     execute(message: Message): void {
         message.channel.send(
