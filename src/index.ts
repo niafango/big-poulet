@@ -13,7 +13,7 @@ for (const file of commandFiles) {
     commands.set(command.name, command);
 }
 
-client.on("message", (message) => {
+client.on("message", (message): void => {
     if (!message.content.startsWith(prefix) || message.author.bot) {
         return;
     }
@@ -33,6 +33,11 @@ client.on("message", (message) => {
     const command = commands.get(commandName);
 
     if (!command) {
+        return;
+    }
+
+    if (command.args && !args.length) {
+        message.reply(`You didn't provide any arguments!`);
         return;
     }
 

@@ -4,8 +4,9 @@ import ICommand from "../ICommand";
 const avatar: ICommand = {
     name: "avatar",
     description: "Avatar!",
+    args: false,
 
-    execute(message: Message, args: string[]): void {
+    execute(message: Message): void {
         if (!message.mentions.users.size) {
             message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
             return;

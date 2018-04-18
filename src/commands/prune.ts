@@ -4,6 +4,7 @@ import ICommand from "../ICommand";
 const prune: ICommand = {
     name: "prune",
     description: "Prune!",
+    args: true,
 
     execute(message: Message, args: string[]): void {
         const amount = parseInt(args[0], 10) + 1;

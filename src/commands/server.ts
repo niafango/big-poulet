@@ -4,8 +4,9 @@ import ICommand from "../ICommand";
 const server: ICommand = {
     name: "server",
     description: "Server!",
+    args: false,
 
-    execute(message: Message, args: string[]): void {
+    execute(message: Message): void {
         message.channel.send(
             `Server name: ${message.guild.name}\n` +
             `Total members: ${message.guild.memberCount}\n` +
