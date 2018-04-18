@@ -2,6 +2,7 @@ import {Message} from "discord.js";
 
 export default interface ICommand {
     name: string;
+    aliases: string[];
     description: string;
     usage: string;
 

@@ -3,6 +3,7 @@ import ICommand from "../ICommand";
 
 const server: ICommand = {
     name: "server",
+    aliases: ["serv", "server-info", "serverInfo"],
     description: "Server!",
     usage: "",
 

@@ -3,6 +3,7 @@ import ICommand from "../ICommand";
 
 const userInfo: ICommand = {
     name: "user-info",
+    aliases: ["userInfo"],
     description: "User-info!",
     usage: "",
 

@@ -3,6 +3,7 @@ import ICommand from "../ICommand";
 
 const prune: ICommand = {
     name: "prune",
+    aliases: ["delete-messages"],
     description: "Prune!",
     usage: "<number of messages to delete>",
 

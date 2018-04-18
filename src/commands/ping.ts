@@ -3,6 +3,7 @@ import ICommand from "../ICommand";
 
 const ping: ICommand = {
     name: "ping",
+    aliases: [],
     description: "Ping!",
     usage: "",
 

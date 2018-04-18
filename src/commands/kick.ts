@@ -3,6 +3,7 @@ import ICommand from "../ICommand";
 
 const kick: ICommand = {
     name: "kick",
+    aliases: [],
     description: "Kick!",
     usage: "",
 

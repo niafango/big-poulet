@@ -3,6 +3,7 @@ import ICommand from "../ICommand";
 
 const argsInfo: ICommand = {
     name: "args-info",
+    aliases: ["argsInfo"],
     description: "Args-info",
     usage: "<...arguments>",
 

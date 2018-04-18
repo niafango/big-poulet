@@ -3,6 +3,7 @@ import ICommand from "../ICommand";
 
 const role: ICommand = {
     name: "role",
+    aliases: ["set-role"],
     description: "Role!",
     usage: "<user> <role>",
 

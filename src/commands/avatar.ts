@@ -3,6 +3,7 @@ import ICommand from "../ICommand";
 
 const avatar: ICommand = {
     name: "avatar",
+    aliases: ["icon", "pfp"],
     description: "Avatar!",
     usage: "",
 

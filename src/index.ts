@@ -33,10 +33,8 @@ client.on("message", (message: Message): void => {
 
     const commandName = firstArg.toLowerCase();
 
-    if (!commands.has(commandName)) {
-        return;
-    }
-    const command = commands.get(commandName);
+    const command = commands.get(commandName) ||
+        commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
 
     if (!command) {
         return;
@@ -70,22 +68,20 @@ client.on("message", (message: Message): void => {
         const now = Date.now();
         const coolDownAmount = command.coolDown * 1000;
 
-        if (!timestamps.has(message.author.id)) {
+        const timestamp = timestamps.get(message.author.id);
+        if (!timestamp) {
             timestamps.set(message.author.id, now);
             setTimeout(() => timestamps.delete(message.author.id), coolDownAmount);
         } else {
-            const timestamp = timestamps.get(message.author.id);
+            const expirationTime = timestamp + coolDownAmount;
 
-            if (timestamp) {
-                const expirationTime = timestamp + coolDownAmount;
-
-                if (now < expirationTime) {
-                    const timeLeft = (expirationTime - now) / 1000;
-                    message.reply(`Please wait ${timeLeft.toFixed(1)} ` +
-                        `more second(s) before reusing the \`${command.name}\` command.`);
-                    return;
-                }
+            if (now < expirationTime) {
+                const timeLeft = (expirationTime - now) / 1000;
+                message.reply(`Please wait ${timeLeft.toFixed(1)} ` +
+                    `more second(s) before reusing the \`${command.name}\` command.`);
+                return;
             }
+
             timestamps.set(message.author.id, now);
             setTimeout(() => timestamps.delete(message.author.id), coolDownAmount);
         }
