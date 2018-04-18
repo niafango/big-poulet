@@ -1,14 +1,15 @@
-import Discord = require("discord.js");
+import { Client, Collection } from "discord.js";
 import fs = require("fs");
-const { prefix, token } = require("./config.json");
+import ICommand from "./ICommand";
+const { prefix, token } = require("../config.json");
 
-const client = new Discord.Client();
-const commands = new Discord.Collection();
+const client = new Client();
+const commands: Collection<string, ICommand> = new Collection();
 
-const commandFiles = fs.readdirSync("./commands");
+const commandFiles: string[] = fs.readdirSync("./dist/commands");
 
 for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
+    const command: ICommand = require(`./commands/${file}`);
     commands.set(command.name, command);
 }
 

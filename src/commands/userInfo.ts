@@ -1,9 +1,13 @@
 import {Message} from "discord.js";
+import ICommand from "../ICommand";
 
-module.exports = {
+const userInfo: ICommand = {
     name: "user-info",
     description: "User-info!",
-    execute(message: Message, args: string[]) {
+
+    execute(message: Message, args: string[]): void {
         message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
     },
 };
+
+module.exports = userInfo;

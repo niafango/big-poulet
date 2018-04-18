@@ -1,9 +1,11 @@
 import {Message} from "discord.js";
+import ICommand from "../ICommand";
 
-module.exports = {
+const server: ICommand = {
     name: "server",
     description: "Server!",
-    execute(message: Message, args: string[]) {
+
+    execute(message: Message, args: string[]): void {
         message.channel.send(
             `Server name: ${message.guild.name}\n` +
             `Total members: ${message.guild.memberCount}\n` +
@@ -11,3 +13,5 @@ module.exports = {
             `Region: ${message.guild.region}`);
     },
 };
+
+module.exports = server;

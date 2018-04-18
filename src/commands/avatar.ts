@@ -1,11 +1,14 @@
 import {Message} from "discord.js";
+import ICommand from "../ICommand";
 
-module.exports = {
+const avatar: ICommand = {
     name: "avatar",
     description: "Avatar!",
-    execute(message: Message, args: string[]) {
+
+    execute(message: Message, args: string[]): void {
         if (!message.mentions.users.size) {
-            return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
+            message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
+            return;
         }
 
         const avatarList = message.mentions.users.map((user) => {
@@ -15,3 +18,5 @@ module.exports = {
         message.channel.send(avatarList);
     },
 };
+
+module.exports = avatar;
