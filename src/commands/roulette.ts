@@ -5,7 +5,7 @@ const ping: ICommand = {
     name: "roulette",
     aliases: ["rand", "random"],
     description: "Retourne un résultat aléatoire parmi les arguments fournis.",
-    usage: "<item1><item2><...item>",
+    usage: "<item 1> <item 2> <item n>",
 
     cooldown: 2,
     isGuildOnly: false,
