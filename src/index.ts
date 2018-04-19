@@ -8,6 +8,7 @@ const client = new Client();
 
 client.on("ready", () => {
     console.log("Ready!");
+    client.user.setActivity("Vos faits et gestes", { type: "WATCHING" });
 });
 
 client.on("message", (message: Message): void => {

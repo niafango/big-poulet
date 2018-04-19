@@ -4,7 +4,10 @@
   "description": "Bot Discord pour le serveur du Poulet",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/index.js | pino",
+    "compile-start": "tsc node dist/index.js | pino",
+    "postinstall": "tsc"
   },
   "repository": {
     "type": "git",
@@ -17,11 +20,14 @@
   },
   "homepage": "https://github.com/niafango/big-poulet#readme",
   "dependencies": {
-    "discord.js": "^11.3.2"
+    "discord.js": "^11.3.2",
+    "node-opus": "^0.2.7",
+    "pino": "^4.16.1",
+    "typescript": "^2.8.1",
+    "ytdl-core": "^0.20.2"
   },
   "devDependencies": {
     "@types/node": "^9.6.5",
-    "tslint": "^5.9.1",
-    "typescript": "^2.8.1"
+    "tslint": "^5.9.1"
   }
 }

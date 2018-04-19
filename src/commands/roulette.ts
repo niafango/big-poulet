@@ -1,7 +1,7 @@
 import {Message} from "discord.js";
 import ICommand from "../ICommand";
 
-const ping: ICommand = {
+const roulette: ICommand = {
     name: "roulette",
     aliases: ["rand", "random"],
     description: "Retourne un résultat aléatoire parmi les arguments fournis.",
@@ -18,4 +18,4 @@ const ping: ICommand = {
     },
 };
 
-module.exports = ping;
+module.exports = roulette;
