@@ -4,7 +4,7 @@ import ICommand from "../ICommand";
 const ping: ICommand = {
     name: "ping",
     aliases: [],
-    description: "Ping!",
+    description: "Ping le bot pour vérifier qu'il est en ligne.",
     usage: "",
 
     cooldown: 5,

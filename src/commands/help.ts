@@ -5,11 +5,11 @@ const { prefix } = require("../../config.json");
 
 const help: ICommand = {
     name: "help",
-    aliases: ["info", "commands"],
-    description: "List all of my commands or info about a specific command.",
-    usage: "[command name]",
+    aliases: ["commands", "commandes", "aide"],
+    description: "Liste de toutes le commandes ou information à propos d'un commande spécifique.",
+    usage: "[nom de la commande]",
 
-    cooldown: 5,
+    cooldown: 1,
     isGuildOnly: false,
     hasArgs: true,
     minimumArgsNb: 0,
@@ -19,32 +19,33 @@ const help: ICommand = {
         const data = [];
 
         if (!args.length) {
-            data.push("Here's a list of all my commands:");
-            data.push(commands.map((command) => command.name).join(", "));
-            data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
+            data.push("Voici la liste des commandes :");
+            data.push("`" + commands.map((command) => command.name).join("`, `") + "`");
+            data.push(`\nTu peux envoyer \`${prefix}help [nom de la commande]\` ` +
+                `pour avoir plus d'informations sur une commande spécifique.`);
         } else {
             const command = commands.get(args[0]);
             if (!command) {
-                message.reply("That\'s not a valid command!");
+                message.reply("Cette commande n'existe pas narvalo !");
                 return;
             }
 
-            data.push(`**Name:** ${command.name}`);
-            data.push(`**Description:** ${command.description}`);
+            data.push(`**Nom :** ${command.name}`);
+            data.push(`**Description :** ${command.description}`);
             if (command.aliases.length) {
-                data.push(`**Aliases:** ${command.aliases.join(", ")}`);
+                data.push(`**Alias :** ${command.aliases.join(", ")}`);
             }
-            data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
-            data.push(`**Cooldown:** ${command.cooldown} second(s)`);
+            data.push(`**Usage :** ${prefix}${command.name} ${command.usage}`);
+            data.push(`**Cooldown :** ${command.cooldown} seconde(s)`);
         }
 
         message.author.send(data, { split: true })
             .then(() => {
                 if (message.channel.type !== "dm") {
-                    message.channel.send("I've sent you a DM with all my commands!");
+                    message.channel.send("Je t'ai répondu en message privé.");
                 }
             })
-            .catch(() => message.reply("It seems like I can't DM you!"));
+            .catch(() => message.reply("Tu m'as bloqué ou quoi ? Je peux pas t'envoyer de message privé :("));
     },
 };
 

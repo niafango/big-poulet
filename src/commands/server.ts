@@ -3,8 +3,8 @@ import ICommand from "../ICommand";
 
 const server: ICommand = {
     name: "server",
-    aliases: ["serv", "server-info", "serverInfo"],
-    description: "Server!",
+    aliases: ["serv", "server-info", "serverInfo", "serveur"],
+    description: "Donne quelques informations à propos du server.",
     usage: "",
 
     cooldown: 5,
@@ -14,10 +14,10 @@ const server: ICommand = {
 
     execute(message: Message): void {
         message.channel.send(
-            `Server name: ${message.guild.name}\n` +
-            `Total members: ${message.guild.memberCount}\n` +
-            `Server creation: ${message.guild.createdAt}\n` +
-            `Region: ${message.guild.region}`);
+            `Nom du serveur : ${message.guild.name}\n` +
+            `Nombre de membres : ${message.guild.memberCount}\n` +
+            `Date de création : ${message.guild.createdAt}\n` +
+            `Région : ${message.guild.region}`);
     },
 };
 
