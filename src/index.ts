@@ -1,6 +1,6 @@
 import {Client, Message} from "discord.js";
 import CommandHandler from "./CommandHandler";
-const { token } = require("../config.json");
+const token = process.env.DISCORD_TOKEN;
 
 const commandHandler = new CommandHandler();
 
