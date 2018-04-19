@@ -7,7 +7,7 @@ const prune: ICommand = {
     description: "Prune!",
     usage: "[number of messages to delete]",
 
-    coolDown: 5,
+    cooldown: 5,
     isGuildOnly: false,
     hasArgs: true,
     minimumArgsNb: 1,

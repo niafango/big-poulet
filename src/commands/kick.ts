@@ -7,7 +7,7 @@ const kick: ICommand = {
     description: "Kick!",
     usage: "",
 
-    coolDown: 5,
+    cooldown: 5,
     isGuildOnly: true,
     hasArgs: false,
     minimumArgsNb: 0,

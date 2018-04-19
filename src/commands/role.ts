@@ -7,7 +7,7 @@ const role: ICommand = {
     description: "Role!",
     usage: "[user] [role]",
 
-    coolDown: 5,
+    cooldown: 5,
     isGuildOnly: true,
     hasArgs: true,
     minimumArgsNb: 2,

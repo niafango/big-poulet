@@ -6,7 +6,7 @@ export default interface ICommand {
     description: string;
     usage: string;
 
-    coolDown: number;
+    cooldown: number;
     isGuildOnly: boolean;
     hasArgs: boolean;
     minimumArgsNb: number;

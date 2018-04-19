@@ -7,7 +7,7 @@ const ping: ICommand = {
     description: "Ping!",
     usage: "",
 
-    coolDown: 5,
+    cooldown: 5,
     isGuildOnly: false,
     hasArgs: false,
     minimumArgsNb: 0,

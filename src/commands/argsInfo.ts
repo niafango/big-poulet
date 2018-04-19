@@ -7,7 +7,7 @@ const argsInfo: ICommand = {
     description: "Args-info",
     usage: "<...arguments>",
 
-    coolDown: 5,
+    cooldown: 5,
     isGuildOnly: false,
     hasArgs: true,
     minimumArgsNb: 1,

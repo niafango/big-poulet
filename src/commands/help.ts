@@ -9,7 +9,7 @@ const help: ICommand = {
     description: "List all of my commands or info about a specific command.",
     usage: "[command name]",
 
-    coolDown: 5,
+    cooldown: 5,
     isGuildOnly: false,
     hasArgs: true,
     minimumArgsNb: 0,
@@ -35,7 +35,7 @@ const help: ICommand = {
                 data.push(`**Aliases:** ${command.aliases.join(", ")}`);
             }
             data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
-            data.push(`**CoolDown:** ${command.coolDown} second(s)`);
+            data.push(`**Cooldown:** ${command.cooldown} second(s)`);
         }
 
         message.author.send(data, { split: true })

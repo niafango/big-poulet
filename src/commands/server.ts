@@ -7,7 +7,7 @@ const server: ICommand = {
     description: "Server!",
     usage: "",
 
-    coolDown: 5,
+    cooldown: 5,
     isGuildOnly: true,
     hasArgs: false,
     minimumArgsNb: 0,

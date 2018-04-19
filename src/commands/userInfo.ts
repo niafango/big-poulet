@@ -7,7 +7,7 @@ const userInfo: ICommand = {
     description: "User-info!",
     usage: "",
 
-    coolDown: 5,
+    cooldown: 5,
     isGuildOnly: false,
     hasArgs: false,
     minimumArgsNb: 0,
