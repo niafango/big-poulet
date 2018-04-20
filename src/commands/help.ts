@@ -26,6 +26,9 @@ const help: ICommand = {
             data.push("`" + commands.map((command) => command.name).join("`, `") + "`");
             data.push(`\nTu peux envoyer \`${prefix}help [nom de la commande]\` ` +
                 `pour avoir plus d'informations sur une commande spécifique.`);
+            data.push(`\nLe bot est en cours de développement et est Open Source.`);
+            data.push(`N'hésite pas à proposer des idées à Simon et/ou à participer au développement.`);
+            data.push(`Url du projet : https://github.com/niafango/big-poulet`);
         } else {
             const command = commands.get(args[0]);
             if (!command) {
