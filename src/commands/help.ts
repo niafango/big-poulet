@@ -1,7 +1,9 @@
 import {Message} from "discord.js";
 import ICommand from "../ICommand";
-import CommandsSingleton from "../singletons/CommandsSingleton";
-const { prefix } = require("../../config.json");
+import SCommands from "../singletons/SCommands";
+import SConfig from "../singletons/SConfig";
+
+const prefix = SConfig.Instance.prefix;
 
 const help: ICommand = {
     name: "help",
@@ -15,7 +17,7 @@ const help: ICommand = {
     minimumArgsNb: 0,
 
     execute(message: Message, args: string[]): void {
-        const commands = CommandsSingleton.Instance.commands;
+        const commands = SCommands.Instance.commands;
         const data = [];
 
         if (!args.length) {

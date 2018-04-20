@@ -3,8 +3,8 @@ import ytdl = require("ytdl-core");
 import ICommand from "../ICommand";
 
 const play: ICommand = {
-    name: "play",
-    aliases: ["joue", "yt", "youtube"],
+    name: "youtube",
+    aliases: ["yt", "ytb"],
     description: "Joue le son d'url youtube dans la channel vocal courant.",
     usage: "<url>",
 

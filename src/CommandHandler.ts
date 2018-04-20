@@ -1,6 +1,7 @@
 import {Collection, Message} from "discord.js";
 import ICommand from "./ICommand";
-import CommandsSingleton from "./singletons/CommandsSingleton";
+import SCommands from "./singletons/SCommands";
+import SConfig from "./singletons/SConfig";
 
 export default class CommandHandler {
     private readonly _prefix: string;
@@ -8,8 +9,8 @@ export default class CommandHandler {
     private _cooldowns: Collection<string, Collection<string, number>>;
 
     constructor() {
-        this._prefix = require("../config.json").prefix;
-        this._commands = CommandsSingleton.Instance.commands;
+        this._prefix = SConfig.Instance.prefix;
+        this._commands = SCommands.Instance.commands;
         this._cooldowns = new Collection<string, Collection<string, number>>();
     }
 

@@ -1,6 +1,8 @@
 import {Client, Message} from "discord.js";
 import CommandHandler from "./CommandHandler";
-const token = process.env.DISCORD_TOKEN;
+import SConfig from "./singletons/SConfig";
+
+const token = SConfig.Instance.token;
 
 const commandHandler = new CommandHandler();
 

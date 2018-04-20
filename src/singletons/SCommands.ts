@@ -2,8 +2,8 @@ import {Collection} from "discord.js";
 import fs = require("fs");
 import ICommand from "../ICommand";
 
-export default class CommandsSingleton {
-    private static _instance: CommandsSingleton;
+export default class SCommands {
+    private static _instance: SCommands;
     private readonly _commands: Collection<string, ICommand>;
 
     private constructor() {
@@ -21,7 +21,7 @@ export default class CommandsSingleton {
         return this._commands;
     }
 
-    public static get Instance(): CommandsSingleton {
-        return this._instance || (this._instance = new CommandsSingleton());
+    public static get Instance(): SCommands {
+        return this._instance || (this._instance = new SCommands());
     }
 }
