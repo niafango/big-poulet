@@ -1,5 +1,5 @@
 import {Message} from "discord.js";
-import ICommand from "../ICommand";
+import ICommand from "../interfaces/ICommand";
 
 const ping: ICommand = {
     name: "ping",
@@ -11,6 +11,7 @@ const ping: ICommand = {
     isGuildOnly: false,
     hasArgs: false,
     minimumArgsNb: 0,
+    hasParameters: false,
 
     execute(message: Message): void {
         message.channel.send("Pong.");

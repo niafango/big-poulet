@@ -1,9 +1,25 @@
 import {Collection, Message} from "discord.js";
-import ICommand from "./ICommand";
-import SCommands from "./singletons/SCommands";
-import SConfig from "./singletons/SConfig";
+import ICommand from "../interfaces/ICommand";
+import IParameter from "../interfaces/IParameter";
+import SCommands from "../singletons/SCommands";
+import SConfig from "../singletons/SConfig";
 
 export default class CommandHandler {
+    private static _getParameter(command: ICommand, args: string[]): IParameter | undefined {
+        if (!command.hasParameters || !command.parameters) {
+            return undefined;
+        }
+
+        const firstArg = args.shift();
+        if (!firstArg) {
+            return undefined;
+        }
+
+        const parameterName = firstArg.toLowerCase();
+
+        return command.parameters.get(parameterName);
+    }
+
     private readonly _prefix: string;
     private readonly _commands: Collection<string, ICommand>;
     private _cooldowns: Collection<string, Collection<string, number>>;
@@ -25,12 +41,19 @@ export default class CommandHandler {
             return;
         }
 
+        const parameter = CommandHandler._getParameter(command, args);
+        if (command.hasParameters && !parameter) {
+            message.reply(`Cette commande doit avoir des paramètres.\n` +
+                `Si tu veux bien faire les choses : \`${this._prefix}${command.name} <param>\``);
+            return;
+        }
+
         if (command.isGuildOnly && message.channel.type !== "text") {
             message.reply("Cette commande ne peut pas être exécuter en message privé.");
             return;
         }
 
-        if (!this._checkArgs(message, command, args)) {
+        if (!this._checkArgs(message, command, args, parameter)) {
             return;
         }
 
@@ -39,7 +62,7 @@ export default class CommandHandler {
         }
 
         try {
-            command.execute(message, args);
+            command.execute(message, args, parameter);
         } catch (error) {
             console.error(error);
             message.reply("Et là, c'est le bug. Cette commande semble codée avec le cul.");
@@ -67,8 +90,10 @@ export default class CommandHandler {
             this._commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
     }
 
-    private _checkArgs(message: Message, command: ICommand, args: string[]): boolean {
-        if (command.hasArgs && args.length < command.minimumArgsNb) {
+    private _checkArgs(message: Message, command: ICommand, args: string[], parameter?: IParameter): boolean {
+        if ((!command.hasParameters && command.hasArgs && args.length < command.minimumArgsNb) ||
+            (command.hasParameters && parameter && parameter.hasArgs && args.length < parameter.minimumArgsNb)) {
+
             let reply: string;
 
             if (!args.length) {
@@ -76,7 +101,12 @@ export default class CommandHandler {
             } else {
                 reply = "Il n'y a pas assez d'arguments, comment veux-tu keksa marche ?";
             }
-            reply += `\nSi tu veux bien faire les choses : \`${this._prefix}${command.name} ${command.usage}\``;
+            if (command.hasParameters && parameter) {
+                reply += `\nSi tu veux bien faire les choses : ` +
+                    `\`${this._prefix}${command.name} ${parameter.name} ${parameter.usage}\``;
+            } else {
+                reply += `\nSi tu veux bien faire les choses : \`${this._prefix}${command.name} ${command.usage}\``;
+            }
 
             message.reply(reply);
             return false;

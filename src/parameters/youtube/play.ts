@@ -1,19 +1,17 @@
 import {Message, VoiceConnection} from "discord.js";
 import ytdl = require("ytdl-core");
-import ICommand from "../ICommand";
+import YoutubeHandler from "../../handlers/YoutubeHandler";
+import IYoutubeParameter from "../../interfaces/IYoutubeParameter";
 
-const play: ICommand = {
-    name: "youtube",
-    aliases: ["yt", "ytb"],
-    description: "Joue le son d'url youtube dans la channel vocal courant.",
+const youtubePlay: IYoutubeParameter = {
+    name: "play",
+    description: "Ajoute un son à la queue. (En cours de développement)",
     usage: "<url>",
 
-    cooldown: 1,
-    isGuildOnly: true,
     hasArgs: true,
     minimumArgsNb: 1,
 
-    execute(message: Message, args: string[]): void {
+    execute(message: Message, args: string[], handler: YoutubeHandler): void {
         const { voiceChannel } = message.member;
 
         if (!voiceChannel) {
@@ -37,4 +35,4 @@ const play: ICommand = {
     },
 };
 
-module.exports = play;
+module.exports = youtubePlay;

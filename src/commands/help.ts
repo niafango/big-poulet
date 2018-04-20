@@ -1,5 +1,5 @@
 import {Message} from "discord.js";
-import ICommand from "../ICommand";
+import ICommand from "../interfaces/ICommand";
 import SCommands from "../singletons/SCommands";
 import SConfig from "../singletons/SConfig";
 
@@ -15,10 +15,11 @@ const help: ICommand = {
     isGuildOnly: false,
     hasArgs: true,
     minimumArgsNb: 0,
+    hasParameters: false,
 
     execute(message: Message, args: string[]): void {
         const commands = SCommands.Instance.commands;
-        const data = [];
+        const data: string[] = [];
 
         if (!args.length) {
             data.push("Voici la liste des commandes :");
@@ -32,13 +33,24 @@ const help: ICommand = {
                 return;
             }
 
-            data.push(`**Nom :** ${command.name}`);
+            data.push(`**Nom :** \`${command.name}\``);
             data.push(`**Description :** ${command.description}`);
             if (command.aliases.length) {
-                data.push(`**Alias :** ${command.aliases.join(", ")}`);
+                data.push(`**Alias :** \`${command.aliases.join("`, `")}\``);
             }
-            data.push(`**Usage :** ${prefix}${command.name} ${command.usage}`);
             data.push(`**Cooldown :** ${command.cooldown} seconde(s)`);
+
+            if (command.hasParameters && command.parameters) {
+                data.push(`**Usage :** \`${prefix}${command.name} <param>\``);
+                data.push(`**Paramètres :**`);
+
+                command.parameters.forEach((parameter) => {
+                    data.push(`     \`${parameter.name} ${parameter.usage}\` - ${parameter.description}`);
+                });
+
+            } else {
+                data.push(`**Usage :** \`${prefix}${command.name} ${command.usage}\``);
+            }
         }
 
         message.author.send(data, { split: true })

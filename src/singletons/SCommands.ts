@@ -1,6 +1,6 @@
 import {Collection} from "discord.js";
 import fs = require("fs");
-import ICommand from "../ICommand";
+import ICommand from "../interfaces/ICommand";
 
 export default class SCommands {
     private static _instance: SCommands;

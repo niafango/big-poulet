@@ -1,13 +1,10 @@
 import {Message} from "discord.js";
 
-export default interface ICommand {
+export default interface IParameter {
     name: string;
-    aliases: string[];
     description: string;
     usage: string;
 
-    cooldown: number;
-    isGuildOnly: boolean;
     hasArgs: boolean;
     minimumArgsNb: number;
 

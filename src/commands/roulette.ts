@@ -1,5 +1,5 @@
 import {Message} from "discord.js";
-import ICommand from "../ICommand";
+import ICommand from "../interfaces/ICommand";
 
 const roulette: ICommand = {
     name: "roulette",
@@ -11,6 +11,7 @@ const roulette: ICommand = {
     isGuildOnly: false,
     hasArgs: true,
     minimumArgsNb: 2,
+    hasParameters: false,
 
     execute(message: Message, args: string[]): void {
         const selectedArgsIndex = Math.floor(Math.random() * args.length);
