@@ -10,6 +10,7 @@ export default class YoutubeHandler {
     private _voiceChannel: VoiceChannel | undefined;
     private _voiceConnection: VoiceConnection | undefined;
     private _dispatcher: StreamDispatcher | undefined;
+    private _currentUrl: string | undefined;
     private _queue: IYoutubeUrl[];
 
     constructor() {
@@ -61,6 +62,10 @@ export default class YoutubeHandler {
     }
 
     public next(message: Message): void {
+        if (!this._isInGoodVoiceChannel(message)) {
+            return;
+        }
+
         if (this._dispatcher) {
             this._dispatcher.end();
         } else {
@@ -69,6 +74,10 @@ export default class YoutubeHandler {
     }
 
     public stop(message: Message): void {
+        if (!this._isInGoodVoiceChannel(message)) {
+            return;
+        }
+
         if (this._dispatcher) {
             this._queue = [];
             this._dispatcher.end();
@@ -87,6 +96,10 @@ export default class YoutubeHandler {
         } else {
             message.reply("J'ai la queue vide.");
         }
+    }
+
+    public sendWhatsPlayingNow(message: Message): void {
+        message.channel.send(`Je joue actuellement ${this._currentUrl}`);
     }
 
     private _isInGoodVoiceChannel(message: Message): boolean {
@@ -134,12 +147,14 @@ export default class YoutubeHandler {
 
             this._dispatcher = this._voiceConnection.playStream(stream);
             this._dispatcher.on("end", () => this._contentEnded());
+            this._currentUrl = url;
         } catch (error) {
             message.reply(`Impossible de lire ${url}`);
         }
     }
 
     private _contentEnded(): void {
+        this._currentUrl = "";
         if (this._queue.length) {
             const youtubeUrl = this._queue.shift();
             if (youtubeUrl) {

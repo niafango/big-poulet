@@ -23,6 +23,7 @@ const youtube: IYoutubeCommand = {
         ["next", require("../parameters/youtube/next")],
         ["stop", require("../parameters/youtube/stop")],
         ["queue", require("../parameters/youtube/queue")],
+        ["now", require("../parameters/youtube/now")],
     ]),
     handler: new YoutubeHandler(),
 
