@@ -18,14 +18,12 @@ export default class YoutubeHandler {
     }
 
     public async play(message: Message, url: string): Promise<void> {
-        console.log("play");
         if (!this._isInGoodVoiceChannel(message)) {
             return;
         }
 
         if (!this._voiceConnection) {
             await this._joinVoiceChannel(message);
-            console.log("_joinVoiceChannel finished");
         }
 
         this._playOrQueueContent(message, url);
@@ -109,7 +107,6 @@ export default class YoutubeHandler {
     }
 
     private _isInGoodVoiceChannel(message: Message): boolean {
-        console.log("_isInGoodVoiceChannel");
         const { voiceChannel } = message.member;
 
         if (!voiceChannel) {
@@ -124,7 +121,6 @@ export default class YoutubeHandler {
     }
 
     private async _joinVoiceChannel(message: Message): Promise<void> {
-        console.log("_joinVoiceChannel");
         const { voiceChannel } = message.member;
 
         const voiceConnection = await voiceChannel.join();
@@ -133,7 +129,6 @@ export default class YoutubeHandler {
     }
 
     private _playOrQueueContent(message: Message, url: string): void {
-        console.log("_playOrQueueContent", url);
         if (!ytdl.validateLink(url)) {
             message.reply("Elle mène à rien ton URL.");
             return;
@@ -147,7 +142,6 @@ export default class YoutubeHandler {
     }
 
     private _playContent(message: Message, url: string): void {
-        console.log("_playContent", url);
         if (!this._voiceConnection) {
             return;
         }
@@ -164,7 +158,6 @@ export default class YoutubeHandler {
     }
 
     private _contentEnded(): void {
-        console.log("_contentEnded");
         this._currentUrl = undefined;
         if (this._queue.length) {
             const youtubeUrl = this._queue.shift();
