@@ -25,6 +25,7 @@ export default class YoutubeHandler {
 
         if (!this._voiceConnection) {
             await this._joinVoiceChannel(message);
+            console.log("_joinVoiceChannel finished");
         }
 
         this._playOrQueueContent(message, url);
@@ -132,7 +133,7 @@ export default class YoutubeHandler {
     }
 
     private _playOrQueueContent(message: Message, url: string): void {
-        console.log("_playOrQueueContent");
+        console.log("_playOrQueueContent", url);
         if (!ytdl.validateLink(url)) {
             message.reply("Elle mène à rien ton URL.");
             return;
@@ -146,7 +147,7 @@ export default class YoutubeHandler {
     }
 
     private _playContent(message: Message, url: string): void {
-        console.log("_playContent");
+        console.log("_playContent", url);
         if (!this._voiceConnection) {
             return;
         }
