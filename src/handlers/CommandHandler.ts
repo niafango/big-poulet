@@ -87,7 +87,7 @@ export default class CommandHandler {
         const commandName = firstArg.toLowerCase();
 
         return this._commands.get(commandName) ||
-            this._commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
+            this._commands.find((cmd) => cmd.aliases && cmd.aliases.indexOf(commandName) !== -1);
     }
 
     private _checkArgs(message: Message, command: ICommand, args: string[], parameter?: IParameter): boolean {
