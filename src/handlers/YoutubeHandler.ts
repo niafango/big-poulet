@@ -99,7 +99,11 @@ export default class YoutubeHandler {
     }
 
     public sendWhatsPlayingNow(message: Message): void {
-        message.channel.send(`Je joue actuellement ${this._currentUrl}`);
+        if (this._currentUrl) {
+            message.channel.send(`Je joue actuellement ${this._currentUrl}`);
+        } else {
+            message.channel.send("Je joue tchi.");
+        }
     }
 
     private _isInGoodVoiceChannel(message: Message): boolean {
@@ -154,7 +158,7 @@ export default class YoutubeHandler {
     }
 
     private _contentEnded(): void {
-        this._currentUrl = "";
+        this._currentUrl = undefined;
         if (this._queue.length) {
             const youtubeUrl = this._queue.shift();
             if (youtubeUrl) {
