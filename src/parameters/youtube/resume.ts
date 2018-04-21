@@ -4,14 +4,14 @@ import IYoutubeParameter from "../../interfaces/IYoutubeParameter";
 
 const youtubeResume: IYoutubeParameter = {
     name: "resume",
-    description: "Reprend la lecture. (En cours de développement)",
+    description: "Reprend la lecture.",
     usage: "",
 
     hasArgs: false,
     minimumArgsNb: 0,
 
     execute(message: Message, args: string[], handler: YoutubeHandler): void {
-        message.reply("Simon c'est un branleur, cette commande n'est pas encore implémentée");
+        handler.resume(message);
     },
 };
 
