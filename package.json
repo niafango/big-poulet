@@ -21,14 +21,14 @@
   "homepage": "https://github.com/niafango/big-poulet#readme",
   "dependencies": {
     "discord.js": "^11.3.2",
-    "ffmpeg-binaries": "^3.2.2-3",
+    "ffmpeg-binaries": "^3.2.2",
     "node-opus": "^0.2.7",
     "pino": "^4.16.1",
-    "typescript": "^2.8.1",
-    "ytdl-core": "^0.20.2"
+    "typescript": "^2.8.3",
+    "ytdl-core": "git+https://github.com/fent/node-ytdl-core.git"
   },
   "devDependencies": {
-    "@types/node": "^9.6.5",
+    "@types/node": "^9.6.6",
     "tslint": "^5.9.1"
   }
 }

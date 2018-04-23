@@ -12,9 +12,11 @@ export default class YoutubeHandler {
     private _dispatcher: StreamDispatcher | undefined;
     private _currentUrl: string | undefined;
     private _queue: IYoutubeUrl[];
+    private _currentQueueIndex: number;
 
     constructor() {
         this._queue = [];
+        this._currentQueueIndex = 0;
     }
 
     public async play(message: Message, url: string): Promise<void> {
@@ -61,13 +63,25 @@ export default class YoutubeHandler {
         }
     }
 
+    public prev(message: Message): void {
+        if (!this._isInGoodVoiceChannel(message)) {
+            return;
+        }
+
+        if (this._dispatcher) {
+            this._dispatcher.end("prev");
+        } else {
+            message.reply("Je n'ai aucun son en attente, tu t'attendais à quoi ?");
+        }
+    }
+
     public next(message: Message): void {
         if (!this._isInGoodVoiceChannel(message)) {
             return;
         }
 
         if (this._dispatcher) {
-            this._dispatcher.end();
+            this._dispatcher.end("next");
         } else {
             message.reply("Je n'ai aucun son en attente, tu t'attendais à quoi ?");
         }
@@ -79,8 +93,7 @@ export default class YoutubeHandler {
         }
 
         if (this._dispatcher) {
-            this._queue = [];
-            this._dispatcher.end();
+            this._dispatcher.end("stop");
         } else {
             message.reply("Je n'ai aucun son en attente, tu t'attendais à quoi ?");
         }
@@ -129,7 +142,7 @@ export default class YoutubeHandler {
     }
 
     private _playOrQueueContent(message: Message, url: string): void {
-        if (!ytdl.validateLink(url)) {
+        if (!ytdl.validateURL(url)) {
             message.reply("Elle mène à rien ton URL.");
             return;
         }
@@ -150,17 +163,27 @@ export default class YoutubeHandler {
             const stream = ytdl(url, {filter: "audioonly"});
 
             this._dispatcher = this._voiceConnection.playStream(stream);
-            this._dispatcher.on("end", () => this._contentEnded());
+            this._dispatcher.on("end", (reason: string) => this._contentEnded(reason));
             this._currentUrl = url;
         } catch (error) {
             message.reply(`Impossible de lire ${url}`);
         }
     }
 
-    private _contentEnded(): void {
+    private _contentEnded(reason: string): void {
+        this._dispatcher = undefined;
         this._currentUrl = undefined;
-        if (this._queue.length) {
-            const youtubeUrl = this._queue.shift();
+
+        if (!reason || reason === "" || reason === "next") {
+            this._currentQueueIndex++;
+        } else if (reason === "prev") {
+            this._currentQueueIndex = this._currentQueueIndex > 0 ? this._currentQueueIndex - 1 : 0;
+        } else if (reason === "stop") {
+            this._currentQueueIndex = -1;
+        }
+
+        if (this._currentQueueIndex >= 0 && this._currentQueueIndex < this._queue.length) {
+            const youtubeUrl = this._queue[this._currentQueueIndex];
             if (youtubeUrl) {
                 this._playContent(youtubeUrl.message, youtubeUrl.url);
                 return;
@@ -173,12 +196,11 @@ export default class YoutubeHandler {
         if (this._voiceChannel) {
             this._voiceChannel.leave();
             this._voiceChannel = undefined;
-            if (this._voiceConnection) {
-                this._voiceConnection = undefined;
-            }
-            if (this._dispatcher) {
-                this._dispatcher = undefined;
-            }
+            this._voiceConnection = undefined;
+            this._dispatcher = undefined;
+            this._currentUrl = undefined;
+            this._queue = [];
+            this._currentQueueIndex = 0;
         }
     }
 }
