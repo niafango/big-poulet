@@ -1,5 +1,6 @@
 import {Collection} from "discord.js";
 import fs = require("fs");
+import path = require("path");
 import ICommand from "../interfaces/ICommand";
 
 export default class SCommands {
@@ -12,8 +13,10 @@ export default class SCommands {
         const commandFiles: string[] = fs.readdirSync("./dist/commands");
 
         for (const file of commandFiles) {
-            const command: ICommand = require(`../commands/${file}`);
-            this._commands.set(command.name, command);
+            if (path.extname(file) === ".js") {
+                const command: ICommand = require(`../commands/${file}`);
+                this._commands.set(command.name, command);
+            }
         }
     }
 

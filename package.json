@@ -3,27 +3,36 @@
   "version": "1.0.0",
   "description": "Bot Discord pour le serveur du Poulet",
   "main": "dist/index.js",
+  "engines": {
+    "node": "9.x",
+    "npm": "*"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/index.js | pino",
-    "compile-start": "tsc node dist/index.js | pino",
+    "start": "node dist/index.js",
+    "compile-start": "tsc node dist/index.js",
     "postinstall": "tsc"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/niafango/big-poulet.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "poulet",
+    "discord.js",
+    "bot",
+    "discord"
+  ],
+  "author": "Simon G",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/niafango/big-poulet/issues"
   },
   "homepage": "https://github.com/niafango/big-poulet#readme",
   "dependencies": {
     "discord.js": "^11.3.2",
-    "ffmpeg-binaries": "^3.2.2",
+    "ffmpeg-binaries": "^3.2.2-3",
     "node-opus": "^0.2.7",
-    "pino": "^4.16.1",
     "typescript": "^2.8.3",
     "ytdl-core": "git+https://github.com/fent/node-ytdl-core.git"
   },
