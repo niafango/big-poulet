@@ -1,4 +1,5 @@
 import {Collection, Message} from "discord.js";
+import i18n from "i18n";
 import ICommand from "../interfaces/ICommand";
 import IParameter from "../interfaces/IParameter";
 import SCommands from "../singletons/SCommands";
@@ -43,13 +44,17 @@ export default class CommandHandler {
 
         const parameter = CommandHandler._getParameter(command, args);
         if (command.hasParameters && !parameter) {
-            message.reply(`Cette commande doit avoir des paramètres.\n` +
-                `Si tu veux bien faire les choses : \`${this._prefix}${command.name} <param>\``);
+            const reply: string[] = [];
+
+            reply.push(i18n.__("errors.noParameter"));
+            reply.push(i18n.__("errors.argumentAdviseWithParameter", this._prefix, command.name));
+
+            message.reply(reply);
             return;
         }
 
         if (command.isGuildOnly && message.channel.type !== "text") {
-            message.reply("Cette commande ne peut pas être exécuter en message privé.");
+            message.reply(i18n.__("errors.serverOnly"));
             return;
         }
 
@@ -65,7 +70,7 @@ export default class CommandHandler {
             command.execute(message, args, parameter);
         } catch (error) {
             console.error(error);
-            message.reply("Et là, c'est le bug. Cette commande semble codée avec le cul.");
+            message.reply(i18n.__("errors.commandCrash"));
         }
     }
 
@@ -94,18 +99,18 @@ export default class CommandHandler {
         if ((!command.hasParameters && command.hasArgs && args.length < command.minimumArgsNb) ||
             (command.hasParameters && parameter && parameter.hasArgs && args.length < parameter.minimumArgsNb)) {
 
-            let reply: string;
+            const reply: string[] = [];
 
             if (!args.length) {
-                reply = "Il faut mettre des arguments con de mime.";
+                reply.push(i18n.__("errors.noArgument"));
             } else {
-                reply = "Il n'y a pas assez d'arguments, comment veux-tu keksa marche ?";
+                reply.push(i18n.__("errors.notEnoughArguments"));
             }
             if (command.hasParameters && parameter) {
-                reply += `\nSi tu veux bien faire les choses : ` +
-                    `\`${this._prefix}${command.name} ${parameter.name} ${parameter.usage}\``;
+                reply.push(i18n.__("errors.parameterAdvise",
+                    this._prefix, command.name, parameter.name, parameter.usage));
             } else {
-                reply += `\nSi tu veux bien faire les choses : \`${this._prefix}${command.name} ${command.usage}\``;
+                reply.push(i18n.__("errors.argumentAdvise", this._prefix, command.name, command.usage));
             }
 
             message.reply(reply);
@@ -132,12 +137,7 @@ export default class CommandHandler {
 
                 if (now < expirationTime) {
                     const timeLeft = (expirationTime - now) / 1000;
-
-                    message.reply(`Patiente ${timeLeft.toFixed(1)} ` +
-                        `de plus avant de réutiliser la commande \`${command.name}\`.\n` +
-                        `(La prochaine fois que tu essayes de spammer mon bot, ` +
-                        `je viens chez toi et je mange tout ce qu'il y a dans ton frigo)`);
-
+                    message.reply(i18n.__("errors.spam", timeLeft.toFixed(1), command.name));
                     return false;
                 }
 

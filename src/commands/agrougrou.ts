@@ -1,10 +1,11 @@
 import {Message} from "discord.js";
+import i18n from "i18n";
 import ICommand from "../interfaces/ICommand";
 
 const help: ICommand = {
     name: "agrougrou",
     aliases: ["ahouuu", "wofe"],
-    description: "AGROUGROU",
+    description: i18n.__("commands.agrougrou.description"),
     usage: "",
 
     cooldown: 1,

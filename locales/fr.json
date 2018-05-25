@@ -1,0 +1,104 @@
+{
+  "watching": "Vos faits et gestes",
+  "commands": {
+    "agrougrou": {
+      "description": "AGROUGROU"
+    },
+    "help": {
+      "description": "Liste de toutes le commandes ou information à propos d'un commande spécifique.",
+      "usage": "[nom de la commande]",
+      "answers": {
+        "commandList": "Voici la liste des commandes :\n`%s`",
+        "commandHelp": "\nTu peux envoyer `%shelp [nom de la commande]` pour avoir plus d'informations sur une commande spécifique.",
+        "askForHelp": "\nLe bot est en cours de développement et est Open Source.\nN'hésite pas à proposer des idées à Simon et/ou à participer au développement.\nUrl du projet : https://github.com/niafango/big-poulet",
+        "name": "**Nom :** `%s`",
+        "description": "**Description :** %s",
+        "alias": "**Alias :** `%s`",
+        "cooldown": "**Cooldown :** %s seconde(s)",
+        "usage": "**Usage :** `%s%s %s`",
+        "usageWithParameters": "**Usage :** `%s%s <param>`",
+        "parameters": "**Paramètres :**",
+        "answeredInDM": "Je t'ai répondu en message privé."
+      },
+      "errors": {
+        "unknownCommand": "Cette commande n'existe pas narvalo !",
+        "cantDM": "Tu m'as bloqué ou quoi ? Je peux pas t'envoyer de message privé :("
+      }
+    },
+    "ping": {
+      "description": "Ping le bot pour vérifier qu'il est en ligne.",
+      "answer": "Pong."
+    },
+    "roulette": {
+      "description": "Retourne un résultat aléatoire parmi les arguments fournis.",
+      "usage": "<item 1> <item 2> <item n>",
+      "answer": "Résultat : %s"
+    },
+    "server": {
+      "description": "Donne quelques informations à propos du server.",
+      "answers": {
+        "name": "Nom du serveur : %s",
+        "memberNumber": "Nombre de membres : %s",
+        "creationDate": "Date de création : %s",
+        "region": "Région : %s"
+      }
+    },
+    "youtube": {
+      "description": "Permet de faire un lot d'actions pour gérer la musique via youtube.",
+      "parameters": {
+        "next": {
+          "description": "Passe au son suivant dans la queue."
+        },
+        "now": {
+          "description": "Quel contenu passe actuellement."
+        },
+        "pause": {
+          "description": "Met la lecture en pause."
+        },
+        "play": {
+          "description": "Ajoute un son à la queue.",
+          "usage": "<url>"
+        },
+        "prev": {
+          "description": "Passe au son précédent dans la queue."
+        },
+        "queue": {
+          "description": "Affiche le contenu de la queue."
+        },
+        "resume": {
+          "description": "Reprend la lecture."
+        },
+        "stop": {
+          "description": "Stop la lecture, la queue est perdue et le bot part du channel vocal courant."
+        }
+      },
+      "answers": {
+        "emptyQueue": "J'ai la queue vide.",
+        "currentlyPlaying": "Je joue actuellement %s",
+        "nothingPlaying": "Je joue tchi."
+      },
+      "errors": {
+        "alreadyPaused": "Je suis déjà en pause couillon.",
+        "pauseNoContent": "Je ne suis pas entrain de jouer un contenu, tu veux que je mette quoi en pause ?",
+        "resumeNotPaused": "Je suis pas en pause sang de tes morts.",
+        "resumeNoContent": "Je ne suis pas entrain de jouer un contenu, tu veux que je mette quoi en lecture ?",
+        "emptyQueue": "Je n'ai aucun son en attente, tu t'attendais à quoi ?",
+        "notInVoiceChannel": "Comment tu veux écouter du son sans être dans un channel vocal ?!",
+        "alreadyInAnotherVoiceChannel": "Je suis occupé à faire du sale dans un autre channel, rentre chez toi Roger.",
+        "badUrl": "Elle mène à rien ton URL.",
+        "readError": "Impossible de lire %s"
+      }
+    }
+  },
+  "errors": {
+    "serverOnly": "Cette commande ne peut pas être exécuter en message privé.",
+    "commandCrash": "Et là, c'est le bug. Cette commande semble codée avec le cul.",
+    "noArgument": "Il faut mettre des arguments con de mime.",
+    "notEnoughArguments": "Il n'y a pas assez d'arguments, comment veux-tu keksa marche ?",
+    "argumentAdvise": "Si tu veux bien faire les choses : `%s%s %s`",
+    "argumentAdviseWithParameter": "Si tu veux bien faire les choses : `%s%s <param>`",
+    "parameterAdvise": "Si tu veux bien faire les choses : `%s%s %s %s`",
+    "noParameter": "Cette commande doit avoir des paramètres.",
+    "spam": "Patiente %s de plus avant de réutiliser la commande `%s`.\n(La prochaine fois que tu essayes de spammer mon bot, je viens chez toi et je mange tout ce qu'il y a dans ton frigo)"
+  }
+}

@@ -1,10 +1,11 @@
 import {Message} from "discord.js";
+import i18n from "i18n";
 import YoutubeHandler from "../../handlers/YoutubeHandler";
 import IYoutubeParameter from "../../interfaces/IYoutubeParameter";
 
 const youtubePrev: IYoutubeParameter = {
     name: "prev",
-    description: "Passe au son précédent dans la queue.",
+    description: i18n.__("commands.youtube.parameters.prev.description"),
     usage: "",
 
     hasArgs: false,

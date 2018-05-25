@@ -1,10 +1,11 @@
 import {Message} from "discord.js";
+import i18n from "i18n";
 import YoutubeHandler from "../../handlers/YoutubeHandler";
 import IYoutubeParameter from "../../interfaces/IYoutubeParameter";
 
 const youtubeStop: IYoutubeParameter = {
     name: "stop",
-    description: "Stop la lecture, la queue est perdue et le bot part du channel vocal courant.",
+    description: i18n.__("commands.youtube.parameters.stop.description"),
     usage: "",
 
     hasArgs: false,

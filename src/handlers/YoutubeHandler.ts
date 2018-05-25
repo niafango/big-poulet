@@ -1,4 +1,5 @@
 import {Message, StreamDispatcher, VoiceChannel, VoiceConnection} from "discord.js";
+import i18n from "i18n";
 import ytdl = require("ytdl-core");
 
 interface IYoutubeUrl {
@@ -40,10 +41,10 @@ export default class YoutubeHandler {
             if (!this._dispatcher.paused) {
                 this._dispatcher.pause();
             } else {
-                message.reply("Je suis déjà en pause couillon.");
+                message.reply(i18n.__("commands.youtube.errors.alreadyPaused"));
             }
         } else {
-            message.reply("Je ne suis pas entrain de jouer un contenu, tu veux que je mette quoi en pause ?");
+            message.reply(i18n.__("commands.youtube.errors.pauseNoContent"));
         }
     }
 
@@ -56,10 +57,10 @@ export default class YoutubeHandler {
             if (this._dispatcher.paused) {
                 this._dispatcher.resume();
             } else {
-                message.reply("Je suis pas en pause sang de tes morts.");
+                message.reply(i18n.__("commands.youtube.errors.resumeNotPaused"));
             }
         } else {
-            message.reply("Je ne suis pas entrain de jouer un contenu, tu veux que je mette quoi en lecture ?");
+            message.reply(i18n.__("commands.youtube.errors.resumeNoContent"));
         }
     }
 
@@ -71,7 +72,7 @@ export default class YoutubeHandler {
         if (this._dispatcher) {
             this._dispatcher.end("prev");
         } else {
-            message.reply("Je n'ai aucun son en attente, tu t'attendais à quoi ?");
+            message.reply(i18n.__("commands.youtube.errors.emptyQueue"));
         }
     }
 
@@ -83,7 +84,7 @@ export default class YoutubeHandler {
         if (this._dispatcher) {
             this._dispatcher.end("next");
         } else {
-            message.reply("Je n'ai aucun son en attente, tu t'attendais à quoi ?");
+            message.reply(i18n.__("commands.youtube.errors.emptyQueue"));
         }
     }
 
@@ -95,7 +96,7 @@ export default class YoutubeHandler {
         if (this._dispatcher) {
             this._dispatcher.end("stop");
         } else {
-            message.reply("Je n'ai aucun son en attente, tu t'attendais à quoi ?");
+            message.reply(i18n.__("commands.youtube.errors.emptyQueue"));
         }
     }
 
@@ -107,15 +108,15 @@ export default class YoutubeHandler {
             });
             message.channel.send(reply);
         } else {
-            message.reply("J'ai la queue vide.");
+            message.reply(i18n.__("commands.youtube.answers.emptyQueue"));
         }
     }
 
     public sendWhatsPlayingNow(message: Message): void {
         if (this._currentUrl) {
-            message.channel.send(`Je joue actuellement ${this._currentUrl}`);
+            message.channel.send(i18n.__("commands.youtube.answers.currentlyPlaying", this._currentUrl));
         } else {
-            message.channel.send("Je joue tchi.");
+            message.channel.send(i18n.__("commands.youtube.answers.nothingPlaying"));
         }
     }
 
@@ -123,10 +124,10 @@ export default class YoutubeHandler {
         const { voiceChannel } = message.member;
 
         if (!voiceChannel) {
-            message.reply("Comment tu veux écouter du son sans être dans un channel vocal ?!");
+            message.reply(i18n.__("commands.youtube.errors.notInVoiceChannel"));
             return false;
         } else if (this._voiceChannel && voiceChannel.id !== this._voiceChannel.id) {
-            message.reply("Je suis occupé à faire du sale dans un autre channel, rentre chez toi Roger.");
+            message.reply(i18n.__("commands.youtube.errors.alreadyInAnotherVoiceChannel"));
             return false;
         }
 
@@ -143,7 +144,7 @@ export default class YoutubeHandler {
 
     private _playOrQueueContent(message: Message, url: string): void {
         if (!ytdl.validateURL(url)) {
-            message.reply("Elle mène à rien ton URL.");
+            message.reply(i18n.__("commands.youtube.errors.badUrl"));
             return;
         }
 
@@ -166,7 +167,7 @@ export default class YoutubeHandler {
             this._dispatcher.on("end", (reason: string) => this._contentEnded(reason));
             this._currentUrl = url;
         } catch (error) {
-            message.reply(`Impossible de lire ${url}`);
+            message.reply(i18n.__("commands.youtube.errors.readError", url));
         }
     }
 

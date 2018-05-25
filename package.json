@@ -30,14 +30,16 @@
   },
   "homepage": "https://github.com/niafango/big-poulet#readme",
   "dependencies": {
+    "@types/i18n": "^0.8.3",
     "discord.js": "^11.3.2",
-    "ffmpeg-binaries": "^3.2.2-3",
-    "node-opus": "^0.2.7",
+    "ffmpeg-binaries": "^3.2.2",
+    "i18n": "^0.8.3",
+    "node-opus": "^0.2.9",
     "typescript": "^2.8.3",
     "ytdl-core": "git+https://github.com/fent/node-ytdl-core.git"
   },
   "devDependencies": {
-    "@types/node": "^9.6.6",
-    "tslint": "^5.9.1"
+    "@types/node": "^9.6.18",
+    "tslint": "^5.10.0"
   }
 }

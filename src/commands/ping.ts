@@ -1,10 +1,11 @@
 import {Message} from "discord.js";
+import i18n from "i18n";
 import ICommand from "../interfaces/ICommand";
 
 const ping: ICommand = {
     name: "ping",
     aliases: [],
-    description: "Ping le bot pour vérifier qu'il est en ligne.",
+    description: i18n.__("commands.ping.description"),
     usage: "",
 
     cooldown: 5,
@@ -14,7 +15,7 @@ const ping: ICommand = {
     hasParameters: false,
 
     execute(message: Message): void {
-        message.channel.send("Pong.");
+        message.channel.send(i18n.__("commands.ping.answer"));
     },
 };
 

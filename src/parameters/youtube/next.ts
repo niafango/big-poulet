@@ -1,10 +1,11 @@
 import {Message} from "discord.js";
+import i18n from "i18n";
 import YoutubeHandler from "../../handlers/YoutubeHandler";
 import IYoutubeParameter from "../../interfaces/IYoutubeParameter";
 
 const youtubeNext: IYoutubeParameter = {
     name: "next",
-    description: "Passe au son suivant dans la queue.",
+    description: i18n.__("commands.youtube.parameters.next.description"),
     usage: "",
 
     hasArgs: false,

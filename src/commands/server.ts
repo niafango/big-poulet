@@ -1,10 +1,11 @@
 import {Message} from "discord.js";
+import i18n from "i18n";
 import ICommand from "../interfaces/ICommand";
 
 const server: ICommand = {
     name: "server",
     aliases: ["serv", "server-info", "serverInfo", "serveur"],
-    description: "Donne quelques informations à propos du server.",
+    description: i18n.__("commands.server.description"),
     usage: "",
 
     cooldown: 5,
@@ -14,11 +15,14 @@ const server: ICommand = {
     hasParameters: false,
 
     execute(message: Message): void {
-        message.channel.send(
-            `Nom du serveur : ${message.guild.name}\n` +
-            `Nombre de membres : ${message.guild.memberCount}\n` +
-            `Date de création : ${message.guild.createdAt}\n` +
-            `Région : ${message.guild.region}`);
+        const answer: string[] = [];
+
+        answer.push(i18n.__("commands.server.answers.name", message.guild.name));
+        answer.push(i18n.__("commands.server.answers.memberNumber", message.guild.memberCount.toString()));
+        answer.push(i18n.__("commands.server.answers.creationDate", message.guild.createdAt.toString()));
+        answer.push(i18n.__("commands.server.answers.region", message.guild.region));
+
+        message.channel.send(answer);
     },
 };
 

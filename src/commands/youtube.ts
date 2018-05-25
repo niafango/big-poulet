@@ -1,4 +1,5 @@
 import {Collection, Message} from "discord.js";
+import i18n from "i18n";
 import YoutubeHandler from "../handlers/YoutubeHandler";
 import IParameter from "../interfaces/IParameter";
 import IYoutubeCommand from "../interfaces/IYoutubeCommand";
@@ -7,7 +8,7 @@ import IYoutubeParameter from "../interfaces/IYoutubeParameter";
 const youtube: IYoutubeCommand = {
     name: "youtube",
     aliases: ["yt", "ytb"],
-    description: "Permet de faire un lot d'actions pour gérer la musique via youtube.",
+    description: i18n.__("commands.youtube.description"),
     usage: "",
 
     cooldown: 1,
