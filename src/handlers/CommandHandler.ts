@@ -22,11 +22,13 @@ export default class CommandHandler {
     }
 
     private readonly _prefix: string;
+    private readonly _commandRegexp: RegExp;
     private readonly _commands: Collection<string, ICommand>;
     private _cooldowns: Collection<string, Collection<string, number>>;
 
     constructor() {
         this._prefix = SConfig.Instance.prefix;
+        this._commandRegexp = /[^\s"']+|"([^"]*)"|'([^']*)'/g;
         this._commands = SCommands.Instance.commands;
         this._cooldowns = new Collection<string, Collection<string, number>>();
     }
@@ -79,7 +81,22 @@ export default class CommandHandler {
     }
 
     private _getArgs(message: Message): string[] {
-        return message.content.slice(this._prefix.length).split(/ +/);
+        const fullCommand = message.content.slice(this._prefix.length);
+        const argsList: string[] = [];
+
+        let match = this._commandRegexp.exec(fullCommand);
+        while (match != null) {
+            if (match[1] != null) {
+                argsList.push(match[1]);
+            } else if (match[2] != null) {
+                argsList.push(match[2]);
+            } else {
+                argsList.push(match[0]);
+            }
+            match = this._commandRegexp.exec(fullCommand);
+        }
+
+        return argsList;
     }
 
     private _getCommand(args: string[]): ICommand | undefined {
