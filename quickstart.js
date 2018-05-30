@@ -11,8 +11,8 @@ var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
 var TOKEN_PATH = TOKEN_DIR + 'youtube-nodejs-quickstart.json';
 
 // Load client secrets from a local file.
-if (process.env.GOOGLE_CLIENT_SECRETS) {
-    authorize(JSON.parse(JSON.parse(process.env.GOOGLE_CLIENT_SECRETS)), getChannel);
+if (process.env.GOOGLE_CLIENT_SECRET) {
+    authorize(JSON.parse(process.env.GOOGLE_CLIENT_SECRET), getChannel);
 } else {
     fs.readFile('client_secret.json', function processClientSecrets(err, content) {
         if (err) {
