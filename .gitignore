@@ -1,6 +1,7 @@
 # Project specifics
 dist/
 config.json
+client_secret.json
 
 # Logs
 logs
